@@ -1,49 +1,53 @@
 package praktikum;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest extends BaseTest {
 
-    private final Ingredient ingredient1 = Mockito.mock(Ingredient.class);
-    private final Ingredient ingredient2 = Mockito.mock(Ingredient.class);
+    private final Ingredient firstIngredient = Mockito.mock(Ingredient.class);
+    private final Ingredient secondIngredient = Mockito.mock(Ingredient.class);
+    private SoftAssertions softly = new SoftAssertions();
 
     @Test
     public void checkSetBuns () {
-        assertNotNull(burger.bun);
-        assertEquals(bun, burger.bun);
+        softly.assertThat(burger.bun).isNotNull();
+        softly.assertThat(burger.bun).isEqualTo(bun);
+        softly.assertAll();
     }
 
     @Test
     public void checkAddIngredient() {
-        burger.addIngredient(ingredient1);
-        assertEquals(1, burger.ingredients.size());
-        assertEquals(ingredient1, burger.ingredients.get(0));
+        burger.addIngredient(firstIngredient);
+        softly.assertThat(burger.ingredients.size()).isEqualTo(1);
+        softly.assertThat(burger.ingredients.get(0)).isEqualTo(firstIngredient);
+        softly.assertAll();
     }
 
     @Test
     public void checkRemoveIngredient() {
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
         burger.removeIngredient(0);
-        assertEquals(1, burger.ingredients.size());
-        assertEquals(ingredient2, burger.ingredients.get(0));
-        assertFalse(burger.ingredients.contains(ingredient1));
+        softly.assertThat(burger.ingredients.size()).isEqualTo(1);
+        softly.assertThat(burger.ingredients.get(0)).isEqualTo(secondIngredient);
+        softly.assertThat(burger.ingredients.contains(firstIngredient)).isFalse();
+        softly.assertAll();
     }
 
     @Test
     public void checkMoveIngredient() {
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
+        burger.addIngredient(firstIngredient);
+        burger.addIngredient(secondIngredient);
         burger.moveIngredient(1,0);
-        assertEquals(2, burger.ingredients.size());
-        assertEquals(ingredient1, burger.ingredients.get(1));
-        assertEquals(ingredient2, burger.ingredients.get(0));
+        softly.assertThat(burger.ingredients.size()).isEqualTo(2);
+        softly.assertThat(burger.ingredients.get(0)).isEqualTo(secondIngredient);
+        softly.assertThat(burger.ingredients.get(1)).isEqualTo(firstIngredient);
+        softly.assertAll();
     }
 
 }
