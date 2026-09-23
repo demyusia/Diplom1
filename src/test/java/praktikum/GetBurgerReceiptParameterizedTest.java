@@ -21,14 +21,14 @@ public class GetBurgerReceiptParameterizedTest extends BaseTest{
 
     @Parameterized.Parameters(name="бургер: 2 булки и {1} ингредиентов")
     public static Object[][] getData() {
-        Ingredient ingredient1 = Mockito.mock(Ingredient.class);
-        Ingredient ingredient2 = Mockito.mock(Ingredient.class);
-        Mockito.when(ingredient1.getName()).thenReturn("hot sauce");
-        Mockito.when(ingredient1.getType()).thenReturn(IngredientType.SAUCE);
-        Mockito.when(ingredient1.getPrice()).thenReturn(100.0f);
-        Mockito.when(ingredient2.getName()).thenReturn("cutlet");
-        Mockito.when(ingredient2.getType()).thenReturn(IngredientType.FILLING);
-        Mockito.when(ingredient2.getPrice()).thenReturn(1000.0f);
+        Ingredient firstIngredient = Mockito.mock(Ingredient.class);
+        Ingredient secondIngredient = Mockito.mock(Ingredient.class);
+        Mockito.when(firstIngredient.getName()).thenReturn("hot sauce");
+        Mockito.when(firstIngredient.getType()).thenReturn(IngredientType.SAUCE);
+        Mockito.when(firstIngredient.getPrice()).thenReturn(100.0f);
+        Mockito.when(secondIngredient.getName()).thenReturn("cutlet");
+        Mockito.when(secondIngredient.getType()).thenReturn(IngredientType.FILLING);
+        Mockito.when(secondIngredient.getPrice()).thenReturn(1000.0f);
 
         return new Object[][]{
                 {List.of(), 0,
@@ -36,13 +36,13 @@ public class GetBurgerReceiptParameterizedTest extends BaseTest{
                         "(==== red bun ====)\n" +
                         "\n" +
                          "Price: 400,000000\n"},
-                {List.of(ingredient1), 1,
+                {List.of(firstIngredient), 1,
                         "(==== red bun ====)\n" +
                         "= sauce hot sauce =\n" +
                         "(==== red bun ====)\n" +
                         "\n" +
                         "Price: 500,000000\n"},
-                {List.of(ingredient1, ingredient2), 2,
+                {List.of(firstIngredient, secondIngredient), 2,
                         "(==== red bun ====)\n" +
                         "= sauce hot sauce =\n" +
                         "= filling cutlet =\n" +
