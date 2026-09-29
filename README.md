@@ -1,4 +1,4 @@
-Юнит-тесты для дипломной работы (задание 1)
+#Юнит-тесты для дипломной работы (задание 1)
 
 Использованы библиотеки: Junit v4.13.2, Mockito v5.23.0, Lombok v1.18.46, JaCoCo v 0.8.15.
 Работа проводилась для веб-приложения Stellar Burgers https://stellarburgers.education-services.ru/:
